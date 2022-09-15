@@ -47,21 +47,29 @@ const ulList = div.querySelector('ul')
 ulList.insertAdjacentHTML('beforebegin', elemHTML)
 
 // Добавить для 2-го параграфа класс text
-console.log(elemHTML)
-
+const pDiv = document.querySelector('.pDiv')
+pDiv.children[1].classList.add('text')
 // Удалить 1-й параграф
-
+pDiv.firstElementChild.remove()
 // Создать функцию generateAutoCard,
 // которая принимает 3 аргумента: brand, color, year
-
+const generateAutoCard = (brand, color, year) => {
+  return `
+    <div class="autoCard">
+      <h2>BRAND YEAR</h2>
+      <p>Автомобиль BRAND - YEAR года. Возраст авто - YEARS лет.</p>
+    </div>
+  `
+}
 // Функция должна возвращать разметку HTML:
-// <div class="autoCard">
-//   <h2>BRAND YEAR</h2>
-//   <p>Автомобиль BRAND - YEAR года. Возраст авто - YEARS лет.</p>
-// </div>
+/* <div class="autoCard">
+  <h2>BRAND YEAR</h2>
+  <p>Автомобиль BRAND - YEAR года. Возраст авто - YEARS лет.</p>
+</div> */
 
 // Создать новый DIV с классом autos
-
+const carsDiv = document.createElement('div')
+carsDiv.classList.add('autos')
 // Создать 3 карточки авто, используя функцию generateAutoCard
 const carsList = [
   { brand: 'Tesla', year: 2015, color: 'Красный' },
@@ -70,7 +78,7 @@ const carsList = [
 ]
 
 // Поместить эти 3 карточки внутрь DIV с классом autos
-
+console.log(carsDiv)
 // Поместить DIV c классом autos на страницу DOM - до DIV с классом wrapper
 
 // Добавить кнопку Удалить на каждую карточку авто
