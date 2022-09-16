@@ -54,10 +54,16 @@ pDiv.firstElementChild.remove()
 // Создать функцию generateAutoCard,
 // которая принимает 3 аргумента: brand, color, year
 const generateAutoCard = (brand, color, year) => {
+  const curDate = new Date()
+  const curYear = curDate.getFullYear()
   return `
     <div class="autoCard">
-      <h2>BRAND YEAR</h2>
-      <p>Автомобиль BRAND - YEAR года. Возраст авто - YEARS лет.</p>
+      <h2>${brand.toUpperCase()} ${year}</h2>
+      <p>Автомобиль ${brand.toUpperCase()} - ${year} года. Возраст авто - ${
+    curYear - year
+  } лет.</p>
+      <p>Цвет: ${color}</p>
+      <button type='button' class='btn'>Удалить</button>
     </div>
   `
 }
@@ -77,13 +83,27 @@ const carsList = [
   { brand: 'Nissan', year: 2012, color: 'Черный' },
 ]
 
+const carsHTML = carsList
+  .map((car) => {
+    return generateAutoCard(car.brand, car.color, car.year)
+  })
+  .join('')
 // Поместить эти 3 карточки внутрь DIV с классом autos
-console.log(carsDiv)
+carsDiv.innerHTML = carsHTML
 // Поместить DIV c классом autos на страницу DOM - до DIV с классом wrapper
-
+div.insertAdjacentElement('beforebegin', carsDiv)
 // Добавить кнопку Удалить на каждую карточку авто
 
 // При клике на кнопку - удалять карточку из структуры DOM
 // 1. Выбрать все кнопки
+const buttons = document.querySelectorAll('.btn')
 // 2. Создать функцию удаления
+function hadleClick(e) {
+  const currentButton = e.currentTarget
+  currentButton.closest('.autoCard').remove()
+}
 // 3. Использовать цикл - чтобы повесить обработчик события на каждую кнопку
+
+buttons.forEach((button) => {
+  button.addEventListener('click', hadleClick)
+})
